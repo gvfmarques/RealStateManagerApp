@@ -15,11 +15,11 @@ namespace RealStateManager.DAL.Repositories
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _managerLogin;
 
-        public UserRepository(RealStateManagerContext _realStateManagerContext, UserManager<User> _userManager, SignInManager<User> _managerLogin) : base(_realStateManagerContext)
+        public UserRepository(RealStateManagerContext realStateManagerContext, UserManager<User> userManager, SignInManager<User> managerLogin) : base(realStateManagerContext)
         {
-            this._realStateManagerContext = _realStateManagerContext;
-            this._userManager = _userManager;
-            this._managerLogin = _managerLogin;
+            _realStateManagerContext = realStateManagerContext;
+            _userManager = userManager;
+            _managerLogin = managerLogin;
         }
 
         public async Task<IdentityResult> CreateUser(User user, string password)

@@ -5,7 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RealStateManager.BLL.Models;
 using RealStateManager.DAL;
+using RealStateManager.DAL.Interface;
+using RealStateManager.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +29,12 @@ namespace RealStateManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RealStateManagerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionDB")));
+            services.AddIdentity<User, Function>().AddEntityFrameworkStores<RealStateManagerContext>();
+
+            services.AddAuthentication();
+            services.AddAuthorization();
+
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddControllersWithViews();
         }
@@ -47,7 +56,7 @@ namespace RealStateManager
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthorization();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
