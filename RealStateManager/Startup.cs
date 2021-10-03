@@ -9,6 +9,7 @@ using RealStateManager.BLL.Models;
 using RealStateManager.DAL;
 using RealStateManager.DAL.Interface;
 using RealStateManager.DAL.Repositories;
+using RealStateManager.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,10 @@ namespace RealStateManager
             services.AddAuthentication();
             services.AddAuthorization();
 
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.ConfigureRepositories();
+            services.ConfigureCookies();
+            services.ConfigureNameUser();
+            services.ConfigureUserPassword();
 
             services.AddControllersWithViews();
         }
