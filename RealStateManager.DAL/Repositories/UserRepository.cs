@@ -93,5 +93,17 @@ namespace RealStateManager.DAL.Repositories
                 throw ex;
             }
         }
+
+        public async Task UpdateUser(User user)
+        {
+            try
+            {
+                await _userManager.UpdateAsync(user);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

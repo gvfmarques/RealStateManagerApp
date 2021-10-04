@@ -8,11 +8,11 @@ namespace RealStateManager.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "The filed {0} is mandatory.")]
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
         [EmailAddress(ErrorMessage = "Invalid Email Address!")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "The filed {0} is mandatory.")]
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

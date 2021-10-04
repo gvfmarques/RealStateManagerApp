@@ -16,5 +16,7 @@ namespace RealStateManager.DAL.Interface
         Task IncludeUserInFunction(User user, string function);
 
         Task<User> GetUserByEmail(string email);
+
+        Task UpdateUser(User user);
     }
 }

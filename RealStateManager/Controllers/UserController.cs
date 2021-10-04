@@ -24,9 +24,9 @@ namespace RealStateManager.Controllers
             _webHostEnvironmnet = webHostEnvironment;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _userRepository.GetAll());
         }
 
         [HttpGet]
@@ -177,6 +177,30 @@ namespace RealStateManager.Controllers
         public IActionResult Analyse(string name)
         {
             return View(name);
+        }
+
+        public IActionResult Disapproved(string name)
+        {
+            return View(name);
+        }
+
+        public async Task<JsonResult> ApproveUser(string userId)
+        {
+            User user = await _userRepository.GetById(userId);
+            user.Status = StatusAccount.Approved;
+            await _userRepository.IncludeUserInFunction(user, "Resident");
+            await _userRepository.UpdateUser(user);
+
+            return Json(true);
+        }
+
+        public async Task<JsonResult> DisapproveUser(string userId)
+        {
+            User user = await _userRepository.GetById(userId);
+            user.Status = StatusAccount.Disapproved;
+            await _userRepository.UpdateUser(user);
+
+            return Json(true);
         }
     }
 }
