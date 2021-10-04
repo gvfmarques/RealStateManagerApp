@@ -11,7 +11,10 @@ namespace RealStateManager.DAL.Interface
     {
         int VerifyIfRegisterExist();
         Task LoginUser(User user, bool remember);
+        Task LogOutUser();
         Task<IdentityResult> CreateUser(User user, string password);
         Task IncludeUserInFunction(User user, string function);
+
+        Task<User> GetUserByEmail(string email);
     }
 }

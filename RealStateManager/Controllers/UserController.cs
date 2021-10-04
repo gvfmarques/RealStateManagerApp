@@ -104,6 +104,76 @@ namespace RealStateManager.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Login()
+        {
+            if (User.Identity.IsAuthenticated)
+                await _userRepository.LogOutUser();
+
+
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                User user = await _userRepository.GetUserByEmail(model.Email);
+
+                if(user != null)
+                {
+                    if(user.Status == StatusAccount.Analysing)
+                    {
+                        return View("Analyse", user.UserName);
+                    }
+
+                    else if(user.Status == StatusAccount.Disapproved)
+                    {
+                        return View("Disapproved", user.UserName);
+                    }
+
+                    else if(user.FirstAccess == true)
+                    {
+                        return View("RedefinePassword", user);
+                    }
+
+                    else
+                    {
+                        PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+
+                        if(passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password) != PasswordVerificationResult.Failed)
+                        {
+                            await _userRepository.LoginUser(user, false);
+                            return RedirectToAction("Index");
+                        }
+
+                        else
+                        {
+                            ModelState.AddModelError("", "Email and/or invalid password!");
+                            return View(model);
+                        }
+                    }
+                }
+
+                else
+                {
+                    ModelState.AddModelError("", "User and/or invalid password!");
+                    return View(model);
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout(string name)
+        {
+            await _userRepository.LogOutUser();
+            return RedirectToAction("Login");
+        }
+
         public IActionResult Analyse(string name)
         {
             return View(name);

@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RealStateManager.BLL.Models
+@inject SignInManager<User> SignInManager
+
+@if(SignInManager.IsSignedIn(User))
+{
+    <form asp-action="Logout" asp-controller="User" id="formLogout">
+        <ul>
+            <li>
+                <a class="nav-link white-text" style="cursor:pointer"; onclick="document.getElementById('formLogout').submit();">Logout</a>
+            </li>
+        </ul>
+    </form>
+}

@@ -58,11 +58,35 @@ namespace RealStateManager.DAL.Repositories
             }
         }
 
+        public async Task LogOutUser()
+        {
+            try
+            {
+                await _managerLogin.SignOutAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public int VerifyIfRegisterExist()
         {
             try
             {
                 return _realStateManagerContext.Users.Count();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            try
+            {
+                return await _userManager.FindByEmailAsync(email);
             }
             catch (Exception ex)
             {
