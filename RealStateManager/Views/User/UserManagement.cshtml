@@ -1,0 +1,31 @@
+﻿@model List<RealStateManager.ViewModels.FunctionUserViewModel>
+    ViewData["Title"] = "update user roles " + @ViewBag.Name;
+}
+
+<form asp-action="UserManagement" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="collection with-header">
+        <div class="collection-header grey darken-1">
+            <h6 class="white-text">Update User Roles @ViewBag.Name</h6>
+        </div>
+
+        <div class="collection-item">
+            @for(int i = 0; i < Model.Count(); i++)
+            {
+            <label>
+                <input type="checkbox" asp-for="@Model[i].IsSelected" />
+                <span asp-for="@Model[i].IsSelected">@Model[i].Name - @Model[i].Description</span>
+                <input type="hidden" asp-for="@Model[i].FunctionId" />
+                <input type="hidden" asp-for="@Model[i].Name" />
+            </label>
+            <br />
+            }
+        </div>
+
+        <div class="collection-item">
+            <input type="submit" value="Update" class="btn-small blue darken-3" /> &emsp;
+            <a asp-controller="User" asp-action="Index">Back</a>
+        </div>
+    </div>
+</form>
+

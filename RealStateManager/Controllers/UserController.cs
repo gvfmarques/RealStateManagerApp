@@ -16,12 +16,14 @@ namespace RealStateManager.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly IFunctionRepository _functionRepository;
         private readonly IWebHostEnvironment _webHostEnvironmnet;
 
-        public UserController(IUserRepository userRepository, IWebHostEnvironment webHostEnvironment)
+        public UserController(IUserRepository userRepository, IWebHostEnvironment webHostEnvironment, IFunctionRepository functionRepository)
         {
             _userRepository = userRepository;
             _webHostEnvironmnet = webHostEnvironment;
+            _functionRepository = functionRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -201,6 +203,77 @@ namespace RealStateManager.Controllers
             await _userRepository.UpdateUser(user);
 
             return Json(true);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UserManagement(string userId, string name)
+        {
+            if (userId == null)
+                return NotFound();
+
+            TempData["userId"] = userId;
+            ViewBag.Name = name;
+            User user = await _userRepository.GetById(userId);
+
+            if (user == null)
+                return NotFound();
+
+            List<FunctionUserViewModel> viewModel = new List<FunctionUserViewModel>();
+
+            foreach(Function function in await _functionRepository.GetAll())
+            {
+                FunctionUserViewModel model = new FunctionUserViewModel
+                {
+                    FunctionId = function.Id,
+                    Name = function.Name,
+                    Description = function.Description
+                };
+
+                if (await _userRepository.VerifyIfUserInFunction(user, function.Name))
+                {
+                    model.IsSelected = true;
+                }
+
+                else
+                    model.IsSelected = false;
+
+                viewModel.Add(model);
+            }
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserManagement(List<FunctionUserViewModel> model)
+        {
+            string userId = TempData["userId"].ToString();
+
+            User user = await _userRepository.GetById(userId);
+
+            if (user == null)
+                return NotFound();
+
+            IEnumerable<string> functions = await _userRepository.GetUserFunctions(user);
+            IdentityResult result = await _userRepository.RemoveUserFunctions(user, functions);
+
+            if(!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Unable to update user roles!");
+                TempData["Exclusao"] = $"Unable to update user roles for {user.UserName}";
+                return View("UserManagement", userId);
+            }
+
+            result = await _userRepository.IncludeUserInFunctions(user,
+                model.Where(x => x.IsSelected == true).Select(x => x.Name));
+
+            if (!result.Succeeded)
+            {
+                ModelState.TryAddModelError("", "Unable to update user roles!");
+                TempData["Exclusion"] = $"Unable to update user roles for {user.UserName}";
+                return View("UserManagement", userId);
+            }
+
+            TempData["Update"] = $"User roles for {user.UserName} have been updated ";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

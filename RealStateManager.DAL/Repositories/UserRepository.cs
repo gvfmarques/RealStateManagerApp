@@ -105,5 +105,53 @@ namespace RealStateManager.DAL.Repositories
                 throw ex;
             }
         }
+
+        public async Task<bool> VerifyIfUserInFunction(User user, string function)
+        {
+            try
+            {
+                return await _userManager.IsInRoleAsync(user, function);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<string>> GetUserFunctions(User user)
+        {
+            try
+            {
+                return await _userManager.GetRolesAsync(user);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IdentityResult> RemoveUserFunctions(User user, IEnumerable<string> functions)
+        {
+            try
+            {
+                return await _userManager.RemoveFromRolesAsync(user, functions);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IdentityResult> IncludeUserInFunctions(User user, IEnumerable<string> functions)
+        {
+            try
+            {
+                return await _userManager.AddToRolesAsync(user, functions);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

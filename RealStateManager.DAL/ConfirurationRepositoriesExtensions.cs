@@ -12,6 +12,7 @@ namespace RealStateManager.DAL
         public static void ConfigureRepositories(this IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IFunctionRepository, FunctionRepository>();
         }
     }
 }

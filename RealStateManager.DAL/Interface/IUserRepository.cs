@@ -18,5 +18,13 @@ namespace RealStateManager.DAL.Interface
         Task<User> GetUserByEmail(string email);
 
         Task UpdateUser(User user);
+
+        Task<bool> VerifyIfUserInFunction(User user, string function);
+
+        Task<IEnumerable<string>> GetUserFunctions(User user);
+
+        Task<IdentityResult> RemoveUserFunctions(User user, IEnumerable<string> functions);
+
+        Task<IdentityResult> IncludeUserInFunctions(User user, IEnumerable<string> functions);
     }
 }
