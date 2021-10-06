@@ -14,7 +14,7 @@ namespace RealStateManager.Extensions
                 options.Cookie.Name = "IdentityCookie";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-                options.LoginPath = "User/Login";
+                options.LoginPath = "/User/Login";
             });
         }
     }

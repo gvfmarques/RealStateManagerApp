@@ -138,7 +138,7 @@ namespace RealStateManager.Controllers
 
                     else if(user.FirstAccess == true)
                     {
-                        return View("RedefinePassword", user);
+                        return RedirectToAction(nameof(RedefinePassword), user);
                     }
 
                     else
@@ -274,6 +274,106 @@ namespace RealStateManager.Controllers
 
             TempData["Update"] = $"User roles for {user.UserName} have been updated ";
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> MyInformations()
+        {
+            return View(await _userRepository.GetUserByName(User));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Updating(string id)
+        {
+            User user = await _userRepository.GetById(id);
+
+            if (user == null)
+                return NotFound();
+
+            UpdateViewModel model = new UpdateViewModel
+            {
+                UserId = user.Id,
+                Name = user.UserName,
+                Identification = user.Identification,
+                Email = user.Email,
+                Picture = user.Picture,
+                Phone = user.PhoneNumber
+            };
+
+            TempData["Picture"] = user.Picture;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Updating(UpdateViewModel viewModel, IFormFile picture)
+        {
+            if(ModelState.IsValid)
+            {
+                if (picture != null)
+                {
+                    string directoryFolder = Path.Combine(_webHostEnvironmnet.WebRootPath, "Images");
+                    string namePicture = Guid.NewGuid().ToString() + picture.FileName;
+
+                    using (FileStream fileStream = new FileStream(Path.Combine(directoryFolder, namePicture), FileMode.Create))
+                    {
+                        await picture.CopyToAsync(fileStream);
+                        viewModel.Picture = "~/Images/" + namePicture;
+                    }
+                }
+
+                else
+                    viewModel.Picture = TempData["Picture"].ToString();
+
+                User user = await _userRepository.GetUserById(viewModel.UserId);
+                user.UserName = viewModel.Name;
+                user.Identification = viewModel.Identification;
+                user.PhoneNumber = viewModel.Phone;
+                user.Picture = viewModel.Picture;
+                user.Email = viewModel.Email;
+
+                await _userRepository.UpdateUser(user);
+
+                if(await _userRepository.VerifyIfUserInFunction(user, "Manager") || 
+                    await _userRepository.VerifyIfUserInFunction(user, "ResidentManager"))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                else
+                    return RedirectToAction(nameof(MyInformations));
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult RedefinePassword(User user)
+        {
+            LoginViewModel model = new LoginViewModel
+            {
+                Email = user.Email
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RedefinePassword(LoginViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                User user = await _userRepository.GetUserByEmail(model.Email);
+                model.Password = _userRepository.CodePassword(user, model.Password);
+                user.PasswordHash = model.Password;
+                user.FirstAccess = false;
+                await _userRepository.UpdateUser(user);
+                await _userRepository.LoginUser(user, false);
+
+                return RedirectToAction(nameof(MyInformations));
+            }
+
+            return View(model);
         }
     }
 }

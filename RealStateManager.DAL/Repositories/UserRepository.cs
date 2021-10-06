@@ -4,6 +4,7 @@ using RealStateManager.DAL.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -147,6 +148,42 @@ namespace RealStateManager.DAL.Repositories
             try
             {
                 return await _userManager.AddToRolesAsync(user, functions);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<User> GetUserByName(ClaimsPrincipal user)
+        {
+            try
+            {
+                return await _userManager.FindByNameAsync(user.Identity.Name);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<User> GetUserById(string userId)
+        {
+            try
+            {
+                return await _userManager.FindByIdAsync(userId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string CodePassword(User user, string password)
+        {
+            try
+            {
+                return _userManager.PasswordHasher.HashPassword(user, password);
             }
             catch (Exception ex)
             {

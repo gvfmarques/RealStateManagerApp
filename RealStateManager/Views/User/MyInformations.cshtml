@@ -1,0 +1,47 @@
+﻿@model RealStateManager.BLL.Models.User
+@{
+    ViewData["Title"] = "My Informations";
+}
+
+@*<partial name="_Confirmations" />*@
+
+<div class="card horizontal">
+    <div class="card-image">
+        <i><img src="@Url.Content(Model.Picture)" height="250" /></i>
+    </div>
+
+    <div class="card-stacked">
+        <div class="card-content">
+            <div class="row">
+                <div class="col s6">
+                    <span class="card-text purple-text darken-3">Name - @Model.UserName</span>
+                </div>
+                <div class="col s6">
+                    <span class="card-text purple-text darken-3">Email - @Model.Email</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s6">
+                    <span class="card-text purple-text darken-3">Identification - @Model.Identification</span>
+                </div>
+                <div class="col s6">
+                    <span class="card-text purple-text darken-3">Phone Number - @Model.PhoneNumber</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-action">
+            <a asp-controller="User" asp-action="Updating" asp-route-id="@Model.Id" class="btn-small purple darken-3">Update</a>
+        </div>
+    </div>
+</div>
+
+<div>
+    @*@await Component.InvokeAsync("Vehicles", Model.Id)*@
+</div>
+
+<div>
+    @*<partial name="_Delete" />*@
+</div>
+

@@ -2,6 +2,7 @@
 using RealStateManager.BLL.Models;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,5 +27,11 @@ namespace RealStateManager.DAL.Interface
         Task<IdentityResult> RemoveUserFunctions(User user, IEnumerable<string> functions);
 
         Task<IdentityResult> IncludeUserInFunctions(User user, IEnumerable<string> functions);
+
+        Task<User> GetUserByName(ClaimsPrincipal user);
+
+        Task<User> GetUserById(string userId);
+
+        string CodePassword(User user, string password);
     }
 }

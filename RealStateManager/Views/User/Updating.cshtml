@@ -1,0 +1,76 @@
+﻿@model RealStateManager.ViewModels.UpdateViewModel
+@{
+    ViewData["Title"] = "Updating resident " + Model.Name;
+}
+
+<!DOCTYPE html>
+
+<div class="form">
+     <div class="collection with-header">
+         <form asp-action="Updating" enctype="multipart/form-data">
+             <div class="colection-header">
+                 <h5>Updating Resident @Model.Name</h5>
+             </div>
+             <div class="collection-item">
+                 <div class="red-text text-darken-4" asp-validation-summary="ModelOnly"></div>
+
+                 <input type="hidden" asp-for="UserId" />
+                 <div class="row">
+                     <div class="input-field col s12">
+                         <input asp-for="Name" class="validate" id="Name" />
+                         <label asp-for="Name" id="Name"></label>
+                         <span asp-validation-for="Name" class="red-text text-darken-4"></span>
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="input-field col s12">
+                         <input asp-for="Identification" class="validate" id="Identification" />
+                         <label asp-for="Identification" id="Identification"></label>
+                         <span asp-validation-for="Identification" class="red-text text-darken-4"></span>
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="input-field col s12">
+                         <input asp-for="Phone" class="validate" id="Phone" />
+                         <label asp-for="Phone" id="Phone"></label>
+                         <span asp-validation-for="Phone" class="red-text text-darken-4"></span>
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="file-field input-field col s12">
+                         <div class="btn-small">
+                             <span>Select your Picture</span>
+                             <input asp-for="Picture" type="file" class="validate" id="picture" />
+                         </div>
+                     </div>
+                     <div class="file-path-wrapper">
+                         <input class="file-path validate" type="text" />
+                     </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="input-field col s12">
+                         <input asp-for="Email" class="validate" type="email" id="Email" />
+                         <label asp-for="Email" id="Email"></label>
+                         <span asp-validation-for="Email" class="red-text text-darken-4"></span>
+                     </div>
+                 </div>
+             </div>
+             <div class="collection-item">
+                 <div class="buttons">
+                     <button type="submit" class="btn-small blue darken-3">Update</button> &emsp;
+                     <a asp-controller="User" asp-action="MyInformations">Back</a>
+                 </div>
+             </div>
+         </form>
+     </div>
+</div>
+@section Scripts{ 
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script src="~/js/StartMasks.min.js"></script>
+}
+
