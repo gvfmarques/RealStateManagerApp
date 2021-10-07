@@ -334,6 +334,8 @@ namespace RealStateManager.Controllers
 
                 await _userRepository.UpdateUser(user);
 
+                TempData["Updating"] = "Updated record";
+
                 if(await _userRepository.VerifyIfUserInFunction(user, "Manager") || 
                     await _userRepository.VerifyIfUserInFunction(user, "ResidentManager"))
                 {

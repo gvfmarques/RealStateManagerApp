@@ -1,0 +1,64 @@
+﻿@model RealStateManager.BLL.Models.Vehicle;
+@{
+    ViewData["Title"] = "Update vehicle " + Model.Name;
+}
+
+<div class="collection with-header">
+    <form asp-action="Edit">
+        <div class="collection-header blue darken-3">
+            <h6 class="white-text">Update vehicle @Model.Name;</h6>
+        </div>
+
+        <div class="collection-item">
+            <div asp-validation-summary="ModelOnly" class="red-text text-darken-4"></div>
+
+            <input type="hidden" asp-for="VehicleId" />
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input asp-for="Name" class="validate" id="name" />
+                    <label asp-for="Name" id="name"></label>
+                    <span class="red-text text-darken-4" asp-validation-for="Name"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input asp-for="Brand" class="validate" id="brand" />
+                    <label asp-for="Brand" id="brand"></label>
+                    <span class="red-text text-darken-4" asp-validation-for="Brand"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input asp-for="Color" class="validate" id="color" />
+                    <label asp-for="Color" id="color"></label>
+                    <span class="red-text text-darken-4" asp-validation-for="Color"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input asp-for="Plate" class="validate" id="plate" />
+                    <label asp-for="Plate" id="plate"></label>
+                    <span class="red-text text-darken-4" asp-validation-for="Plate"></span>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="UserId" />
+
+        <div class="collection-item">
+            <button type="submit" class="btn-small blue darken-3">Update</button> &emsp;
+            <a asp-action="MyInformations" asp-controller="User">Back</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script src="~/js/StartMasks.min.js"></script>
+
+}

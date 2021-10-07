@@ -1,0 +1,38 @@
+﻿@if (TempData["NewRegister"] != null)
+{
+    <div class="card-panel green darken-3 valign-wraper white-text">
+        <div class="col s1">
+            <i class="material-icons">check_box</i>
+        </div>
+
+        <div class="col s11">
+            @TempData["NewRegister"].ToString();
+        </div>
+    </div>
+}
+
+@if (TempData["Updating"] != null)
+{
+    <div class="card-panel blue darken-3 valign-wraper white-text">
+        <div class="col s1">
+            <i class="material-icons">check_box</i>
+        </div>
+
+        <div class="col s11">
+            @TempData["Updating"].ToString();
+        </div>
+    </div>
+}
+
+@if (TempData["Exclusion"] != null)
+{
+    <div class="card-panel red darken-3 valign-wraper white-text">
+        <div class="col s1">
+            <i class="material-icons">check_box</i>
+        </div>
+
+        <div class="col s11">
+            @TempData["Exclusion"].ToString();
+        </div>
+    </div>
+}

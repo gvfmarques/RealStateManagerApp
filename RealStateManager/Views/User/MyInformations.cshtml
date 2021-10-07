@@ -3,7 +3,7 @@
     ViewData["Title"] = "My Informations";
 }
 
-@*<partial name="_Confirmations" />*@
+<partial name="_Confirmations" />
 
 <div class="card horizontal">
     <div class="card-image">
@@ -38,10 +38,34 @@
 </div>
 
 <div>
-    @*@await Component.InvokeAsync("Vehicles", Model.Id)*@
+    @await Component.InvokeAsync("Vehicles", Model.Id)
 </div>
 
 <div>
-    @*<partial name="_Delete" />*@
+    <partial name="_ModalDelete" />
 </div>
+
+@section Scripts{
+    <script>
+        function ConfirmDeletion(id, name) {
+            $('.modal').modal({
+                dismissble: true
+            });
+
+            $('#modal').modal('open');
+            $('.name').text(name);
+
+            $(".btnDelete").on('click', function () {
+                $.ajax({
+                    method: "POST",
+                    url: "/Vehicles/Delete",
+                    data: { id: id },
+                    success: function (data) {
+                        location.reload(true);
+                    }
+                })
+            })
+        }
+    </script>
+}
 
