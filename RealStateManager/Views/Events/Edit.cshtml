@@ -1,0 +1,52 @@
+﻿@model RealStateManager.BLL.Models.Event
+
+@{
+    ViewData["Title"] = "Update Event";
+}
+
+<div class="form">
+    <div class="collection with-header">
+        <form asp-action="Edit">
+            <div class="collection-header blue darken-3">
+                <h6 class="white-text">Update Event</h6>
+            </div>
+
+            <div class="collection-item">
+                <div asp-validation-summary="ModelOnly" class="red-text text-darken-4"></div>
+
+                <input type="hidden" asp-for="EventId" />
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input asp-for="Name" class="validate" id="name" />
+                        <label asp-for="Name" id="name"></label>
+                        <span class="red-text text-darken-4" asp-validation-for="Name"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input asp-for="Date" type="text" class="validate" id="date" />
+                        <label asp-for="Date" id="date"></label>
+                        <span class="red-text text-darken-4" asp-validation-for="Date"></span>
+                    </div>
+                </div>
+
+                <input type="hidden" asp-for="UserId" />
+            </div>
+
+            <div class="collection-item">
+                <button type="submit" class="btn-small blue darken-3">Updating</button> &emsp;
+                <a asp-action="Index" asp-controller="Events">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/InitializeDatepicker.js"></script>
+}

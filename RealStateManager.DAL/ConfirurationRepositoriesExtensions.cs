@@ -14,6 +14,7 @@ namespace RealStateManager.DAL
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IFunctionRepository, FunctionRepository>();
             services.AddTransient<IVehicleRepository, VehicleRepository>();
+            services.AddTransient<IEventRepository, EventRepository>();
         }
     }
 }
