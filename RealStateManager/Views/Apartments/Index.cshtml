@@ -1,0 +1,64 @@
+﻿@model IEnumerable<RealStateManager.BLL.Models.Apartment>
+
+@{
+    ViewData["Title"] = "Apartments Registered";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="tables">
+    <partial name="_Confirmations" />
+
+    <div class="row valign-wrapper">
+        <div class="col s9">
+            <h6>Apartments Registered</h6>
+        </div>
+        <div class="col s3">
+            <a asp-controller="Apartments" asp-action="Create" class="waves-effect waves-light btn-small btn-floating grey darken-4 tooltip" data-position="right" data-tooltip="New apartment"><i class="material-icons">Add</i></a>
+        </div>
+    </div>
+
+
+    @foreach (var item in Model)
+    {
+        <div class="row card-apartments">
+            <div class="col s12">
+                <div class="card horizontal">
+                    <div class="card-image">
+                        <img src="@Url.Content(item.Picture)" height="250" alt="Apartments" />
+                    </div>
+
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <span class="grey-text darken-1">Owner - @item.ApartmentOwner.UserName</span> &nbsp;
+                            <span class="grey-text darken-1">Resident - @item.ApartmentResident.UserName</span>
+                            <hr />
+                            <div class="teal-text darken-2">
+                                <div class="row">
+                                    <div class="col s6">
+                                        <span>@item.Floor ° Floor</span>
+                                    </div>
+                                    <div class="col s6">
+                                        <span>Número @item.Number</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-action">
+                            <a asp-action="Edit" asp-route-id="@item.ApartmentId" class="btn-small purple darken-4">Updating</a> &nbsp;
+                            <a onclick="ConfirmarExclusao(@item.ApartmentId, @item.Number, '@controller')" class="btn-small red accent-3 modal-trigger" data-target="modal">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<partial name="_ModalDelete" />
+
+@section Scripts{
+    <script src="~/js/ConfirmDeletion.js"></script>
+}

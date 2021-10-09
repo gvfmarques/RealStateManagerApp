@@ -1,0 +1,73 @@
+﻿@model RealStateManager.BLL.Models.Apartment
+
+@{
+    ViewData["Title"] = "New apartment";
+}
+
+
+<div class="form">
+    <div class="collection with-header">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="collection-header green darken-3">
+                <h6 class="white-text">New Apartment</h6>
+            </div>
+
+            <div class="collection-item">
+                <div asp-validation-summary="ModelOnly" class="red-text text-darken-4"></div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input asp-for="Number" class="validate" id="number" />
+                        <label asp-for="Number" id="number"></label>
+                        <span class="red-text text-darken-4" asp-validation-for="Number"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input asp-for="Floor" class="validate" id="floor" />
+                        <label asp-for="Floor" id="floor"></label>
+                        <span class="red-text text-darken-4" asp-validation-for="Floor"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="file-field input-field col s12">
+                        <div class="btn-small">
+                            <span>Selecte your picture</span>
+                            <input asp-for="Picture" type="file" class="validate" id="picture" />
+                        </div>
+
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select asp-for="ApartmentResidentId" class="validate" asp-items="ViewBag.MoradorId" id="apartmentResident"></select>
+                        <label asp-for="ApartmentResidentId" id="ApartmentResident">Select a Resident</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select asp-for="ApartmentOwnerId" class="validate" asp-items="ViewBag.ProprietarioId" id="apartmentOwner"></select>
+                        <label asp-for="ApartmentOwnerId" id="apartmentOwner">Select an Owner</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collection-item">
+                <button type="submit" class="btn-small green darken-3">Save</button> &emsp;
+                <a asp-action="Index" asp-controller="Apartments">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/InitializeSelect.js"></script>
+}
