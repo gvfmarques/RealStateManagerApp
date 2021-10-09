@@ -7,11 +7,11 @@ using System.Text;
 
 namespace RealStateManager.DAL.Mapping
 {
-    public class HistoryResourceMapping : IEntityTypeConfiguration<HistoryResource>
+    public class HistoryResourceMapping : IEntityTypeConfiguration<HistoricResource>
     {
-        public void Configure(EntityTypeBuilder<HistoryResource> builder)
+        public void Configure(EntityTypeBuilder<HistoricResource> builder)
         {
-            builder.HasKey(hr => hr.HistoryResourceId);
+            builder.HasKey(hr => hr.HistoricResourceId);
             builder.Property(hr => hr.Value).IsRequired();
             builder.Property(hr => hr.Type).IsRequired();
             builder.Property(hr => hr.Day).IsRequired();

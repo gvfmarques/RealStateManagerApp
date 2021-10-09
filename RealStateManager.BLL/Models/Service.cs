@@ -16,7 +16,7 @@ namespace RealStateManager.BLL.Models
         public string UserId { get; set; }
         public virtual User User { get; set; }
 
-        public ICollection<BuildingService> BuildingServices { get; set; }
+        public ICollection<ServiceBuilding> BuildingServices { get; set; }
     }
 
     public enum StatusService

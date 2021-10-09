@@ -10,6 +10,6 @@ namespace RealStateManager.BLL.Models
         public string Name { get; set; }
 
         public virtual ICollection<Rent> Rents{ get; set; }
-        public virtual ICollection<HistoryResource> HistoryResources { get; set; }
+        public virtual ICollection<HistoricResource> HistoryResources { get; set; }
     }
 }

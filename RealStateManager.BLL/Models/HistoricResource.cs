@@ -4,10 +4,10 @@ using System.Text;
 
 namespace RealStateManager.BLL.Models
 {
-    public class HistoryResource
+    public class HistoricResource
     {
 
-        public int HistoryResourceId { get; set; }
+        public int HistoricResourceId { get; set; }
 
         public decimal Value { get; set; }
 

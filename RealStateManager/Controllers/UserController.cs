@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@ namespace RealStateManager.Controllers
             _functionRepository = functionRepository;
         }
 
+        [Authorize(Roles = "Manager, ResidentManager")]
         public async Task<IActionResult> Index()
         {
             return View(await _userRepository.GetAll());
@@ -37,6 +39,7 @@ namespace RealStateManager.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Register(ViewModelRegister model, IFormFile picture)
@@ -106,6 +109,7 @@ namespace RealStateManager.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -116,6 +120,7 @@ namespace RealStateManager.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -169,6 +174,7 @@ namespace RealStateManager.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Logout(string name)
         {
@@ -186,6 +192,7 @@ namespace RealStateManager.Controllers
             return View(name);
         }
 
+        [Authorize(Roles = "Manager, ResidentManager")]
         public async Task<JsonResult> ApproveUser(string userId)
         {
             User user = await _userRepository.GetById(userId);
@@ -196,6 +203,7 @@ namespace RealStateManager.Controllers
             return Json(true);
         }
 
+        [Authorize(Roles = "Manager, ResidentManager")]
         public async Task<JsonResult> DisapproveUser(string userId)
         {
             User user = await _userRepository.GetById(userId);
@@ -205,6 +213,7 @@ namespace RealStateManager.Controllers
             return Json(true);
         }
 
+        [Authorize(Roles = "Manager")]
         [HttpGet]
         public async Task<IActionResult> UserManagement(string userId, string name)
         {
@@ -242,6 +251,7 @@ namespace RealStateManager.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         public async Task<IActionResult> UserManagement(List<FunctionUserViewModel> model)
         {
@@ -281,6 +291,7 @@ namespace RealStateManager.Controllers
             return View(await _userRepository.GetUserByName(User));
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Updating(string id)
         {
@@ -304,6 +315,7 @@ namespace RealStateManager.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Updating(UpdateViewModel viewModel, IFormFile picture)
@@ -349,6 +361,7 @@ namespace RealStateManager.Controllers
             return View(viewModel);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult RedefinePassword(User user)
         {
@@ -360,6 +373,7 @@ namespace RealStateManager.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> RedefinePassword(LoginViewModel model)
         {

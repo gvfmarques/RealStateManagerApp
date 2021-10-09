@@ -14,11 +14,11 @@ namespace RealStateManager.DAL
         public DbSet<Apartment> Apartments { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Function> Functions { get; set; }
-        public DbSet<HistoryResource> HistoryResources { get; set; }
+        public DbSet<HistoricResource> HistoricResources { get; set; }
         public DbSet<Month> Months { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<BuildingService>BuildingServices { get; set; }
+        public DbSet<ServiceBuilding>ServiceBuildings { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
