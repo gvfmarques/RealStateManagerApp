@@ -4,6 +4,15 @@
     height: 100%;
 }
 
+.body-content {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.sidenav {
+    width: 360px;
+}
+
 .registrationForm {
     position: absolute;
     width: 40%;
@@ -32,4 +41,37 @@
     padding-top: 35px;
     padding-right: 35px;
     padding-left: 35px;
+}
+
+.fields {
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.tables, .form {
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+.spaced-Card {
+    padding-top: 25px;
+    padding-left: 50px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+}
+
+.collectionpie {
+    padding-left: 10px;
+}
+
+.up {
+    background-color: #1b5e20;
+    color: white;
+    border-radius: 100%;
+}
+
+.down {
+    background-color: #b71c1c;
+    color: white;
+    border-radius: 100%;
 }

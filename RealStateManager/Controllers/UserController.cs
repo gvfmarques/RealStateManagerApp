@@ -271,7 +271,7 @@ namespace RealStateManager.Controllers
             if(!result.Succeeded)
             {
                 ModelState.AddModelError("", "Unable to update user roles!");
-                TempData["Exclusao"] = $"Unable to update user roles for {user.UserName}";
+                TempData["Exclusion"] = $"Unable to update user roles for {user.UserName}";
                 return View("UserManagement", userId);
             }
 

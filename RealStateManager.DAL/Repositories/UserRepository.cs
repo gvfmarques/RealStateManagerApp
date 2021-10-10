@@ -119,7 +119,7 @@ namespace RealStateManager.DAL.Repositories
             }
         }
 
-        public async Task<IEnumerable<string>> GetUserFunctions(User user)
+        public async Task<IList<string>> GetUserFunctions(User user)
         {
             try
             {

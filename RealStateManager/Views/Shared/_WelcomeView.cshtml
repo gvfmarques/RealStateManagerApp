@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RealStateManager.BLL.Models
+@using RealStateManager.DAL.Interface
+
+@inject SignInManager<User> _managerLogin
+@inject UserManager<User> _managerUsers
+@inject IUserRepository _userRepository
+
+@{
+    User user = await _userRepository.GetUserByName(User);
+    IList<string> functions = await _userRepository.GetUserFunctions(user);
+}
+
+@if (_managerLogin.IsSignedIn(User))
+{
+    <ul>
+        <li>
+            <a class="nav-link" asp-controller="User" asp-action="MyInformations"><span class="white-text">Hello , @user.UserName</span></a>
+        </li>
+
+        <li>
+            <a class="nav-link white-text">@user.Email</a>
+        </li>
+
+        <li>
+            @foreach (string function in functions)
+            {
+                <a class="nav-link white-text">@function</a>
+            }
+        </li>
+
+        <li>
+            <a class="nav-link white-text">Welcome to RSM PropertyManager</a>
+        </li>
+
+    </ul>
+}

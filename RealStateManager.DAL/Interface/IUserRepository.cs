@@ -22,7 +22,7 @@ namespace RealStateManager.DAL.Interface
 
         Task<bool> VerifyIfUserInFunction(User user, string function);
 
-        Task<IEnumerable<string>> GetUserFunctions(User user);
+        Task<IList<string>> GetUserFunctions(User user);
 
         Task<IdentityResult> RemoveUserFunctions(User user, IEnumerable<string> functions);
 

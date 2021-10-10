@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RealStateManager.BLL.Models
+@using RealStateManager.DAL.Interface
+
+@inject SignInManager<User> _managerLogin
+@inject UserManager<User> _managerUsers
+@inject IUserRepository _userRepository
+
+@{
+
+    User user = await _userRepository.GetUserByName(User);
+}
+
+<ul id="slide-out" class="sidenav sidenav-fixed">
+    <li class="center-align">
+        <div class="user-view">
+            <div class="background purple darken-4">
+
+            </div>
+            <text> <partial name="_WelcomeView" /></text>
+        </div>
+    </li>
+
+    @if (await _userRepository.VerifyIfUserInFunction(user, "Manager") || await _userRepository.VerifyIfUserInFunction(user, "ResidentManager"))
+    {
+        <li class="nav-item"><a class="nav-link" asp-controller="Dashboard" asp-action="Index"><i class="material-icons">insert_chart</i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Index"><i class="material-icons">account_box</i> Users</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Apartments" asp-action="Index"><i class="material-icons">store</i> Apartments</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Rents" asp-action="Index"><i class="material-icons">attach_money</i>Rents</a></li>
+    }
+
+    @if (await _userRepository.VerifyIfUserInFunction(user, "Manager"))
+    {
+        <li class="nav-item"><a class="nav-link" asp-controller="Functions" asp-action="Index"><i class="material-icons">group</i>Functions</a></li>
+    }
+
+    <li class="nav-item"><a class="nav-link" asp-controller="Payments" asp-action="Index"><i class="material-icons">monetization_on</i>Payments</a></li>
+    <li class="nav-item"><a class="nav-link" asp-controller="Events" asp-action="Index"><i class="material-icons">list</i>Events</a></li>
+    <li class="nav-item"><a class="nav-link" asp-controller="Services" asp-action="Index"><i class="material-icons">settings</i> Services</a></li>
+</ul>
