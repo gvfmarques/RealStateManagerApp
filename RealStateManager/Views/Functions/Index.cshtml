@@ -1,0 +1,70 @@
+﻿@model IEnumerable<RealStateManager.BLL.Models.Function>
+
+@{
+    ViewData["Title"] = "Registered Functions";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="tables">
+
+    <partial name="_Confirmations" />
+
+    <div class="collection with-header">
+        <div class="collection-header grey darken-1">
+            <div class="row">
+                <div class="col s10">
+                    <h6 class="white-text">Registered Functions</h6>
+                </div>
+                <div class="col s2">
+                    <a asp-controller="Functions" asp-action="Create" class="waves-effect waves-light btn-small btn-floating grey darken-4 tooltip" data-position="right" data-tooltip="New function">
+                        <i class="material-icons">Add</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="collection-item">
+            <table class="striped highlight reponsive">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                <a asp-controller="Functions" asp-action="Edit" asp-route-id="@item.Id" class="btn-floating btn-small blue darken-4 tooltip" data-position="right" data-tooltip="Update Function">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+
+                                <a onclick="ConfirmDeletion('@item.Id', '@item.Name', '@controller')" class="btn-floating btn-small red darken-4 tooltip modal-trigger" data-target="modal" data-position="right" data-tooltip="Delete function">
+                                    <i class="material-icons">delete_forever</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<partial name="_ModalDelete" />
+
+@section Scripts {
+    <script src="~/js/ConfirmDeletion.js"></script>
+}

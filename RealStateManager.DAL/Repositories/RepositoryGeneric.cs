@@ -106,6 +106,19 @@ namespace RealStateManager.DAL.Repositories
             }
         }
 
+        public async Task Insert(List<TEntity> entity)
+        {
+            try
+            {
+                await _realStateManagerContext.AddRangeAsync(entity);
+                await _realStateManagerContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task Update(TEntity entity)
         {
             try

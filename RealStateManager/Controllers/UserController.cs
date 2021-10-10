@@ -152,13 +152,16 @@ namespace RealStateManager.Controllers
 
                         if(passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password) != PasswordVerificationResult.Failed)
                         {
-                            await _userRepository.LoginUser(user, false);
-                            return RedirectToAction("Index");
+                            await _userRepository.LoginUser(user, false); 
+                            if (await _userRepository.VerifyIfUserInFunction(user, "Resident"))
+                                return RedirectToAction(nameof(MyInformations));
+                            else
+                                return RedirectToAction(nameof(Index));
                         }
 
                         else
                         {
-                            ModelState.AddModelError("", "Email and/or invalid password!");
+                            ModelState.AddModelError("", "User and/or invalid password!");
                             return View(model);
                         }
                     }

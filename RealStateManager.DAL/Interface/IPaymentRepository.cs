@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace RealStateManager.DAL.Interface
 {
-    public interface IFunctionRepository : IRepositoryGeneric<Function>
+    public interface IPaymentRepository : IRepositoryGeneric<Payment>
     {
-        Task AddFunction(Function function);
-
-        new Task UpdateFunction(Function function);
+        Task<IEnumerable<Payment>> GetPaymentByUser(string userId);
     }
 }

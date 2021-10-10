@@ -1,0 +1,95 @@
+﻿@model IEnumerable<RealStateManager.BLL.Models.Payment>
+
+@using RealStateManager.BLL.Models
+
+@{
+    ViewData["Title"] = "Payments Registered";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="tables">
+
+    <partial name="_Confirmations" />
+
+    <div class="collection with-header">
+        <div class="collection-header grey darken-1">
+            <div class="row">
+                <div class="col s10">
+                    <h6 class="white-text">Payments Registered</h6>
+                </div>
+                <div class="col s2">
+                </div>
+            </div>
+        </div>
+
+        <div class="collection-item">
+            <table class="striped highlight reponsive">
+                <thead>
+                    <tr>
+                        <th>
+                            Month
+                        </th>
+                        <th>
+                            Rent Value
+                        </th>
+                        <th>
+                            Payment Date
+                        </th>
+                        <th>
+                            Status
+                        </th>
+
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Rent.Month.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Rent.RentValue)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DatePayment)
+                            </td>
+
+                            @if (item.Status == StatusPayment.Late)
+                            {
+                                <td>
+                                    <span class="new badge red darken-3" data-badge-caption="">@Html.DisplayFor(modelItem => item.Status)</span>
+                                </td>
+
+                                <td>
+                                    <a asp-action="MakePayment" asp-route-id="@item.PaymentId" data-position="right" data-tooltip="Make Payment" class="btn-small btn-floating green accent-4 tooltip">
+                                        <i class="material-icons">credit_card</i>
+                                    </a>
+                                </td>
+                            }
+                            else if (item.Status == StatusPayment.PaidOut)
+                            {
+                                <td>
+                                    <span class="new badge green darken-3" data-badge-caption="">@Html.DisplayFor(modelItem => item.Status)</span>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <span class="new badge orange darken-3" data-badge-caption="">@Html.DisplayFor(modelItem => item.Status)</span>
+                                </td>
+
+                                <td>
+                                    <a asp-action="MakePayment" asp-route-id="@item.PaymentId" data-position="right" data-tooltip="Make Payment" class="btn-small btn-floating green accent-4 tooltip">
+                                        <i class="material-icons">credit_card</i>
+                                    </a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

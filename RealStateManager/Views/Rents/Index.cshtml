@@ -1,0 +1,77 @@
+﻿@model IEnumerable<RealStateManager.BLL.Models.Rent>
+
+@{
+    ViewData["Title"] = "Rents Registered";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="tables">
+
+    <partial name="_Confirmations" />
+
+    <div class="collection with-header">
+        <div class="collection-header grey darken-1">
+            <div class="row">
+                <div class="col s10">
+                    <h6 class="white-text">Rents Registered</h6>
+                </div>
+                <div class="col s2">
+                    <a asp-controller="Rents" asp-action="Create" class="waves-effect waves-light btn-small btn-floating grey darken-4 tooltip" data-position="right" data-tooltip="New Rent">
+                        <i class="material-icons">Add</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="collection-item">
+            <table class="striped highlight reponsive">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RentValue)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Month)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Year)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                $ @Html.DisplayFor(modelItem => item.RentValue)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Month.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Year)
+                            </td>
+                            <td>
+                                <a asp-controller="Rents" asp-action="Edit" asp-route-id="@item.RentId" class="btn-floating btn-small blue darken-4 tooltip" data-position="right" data-tooltip="Update Rent">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+
+                                <a onclick="ConfirmDeletion(@item.RentId, '@item.RentValue.ToString()', '@controller')" class="btn-floating btn-small red darken-4 tooltip modal-trigger" data-target="modal" data-position="right" data-tooltip="Delete Rent">
+                                    <i class="material-icons">delete_forever</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<partial name="_ModalDelete" />
+
+@section Scripts {
+    <script src="~/js/ConfirmDeletion.js"></script>
+}
+

@@ -1,0 +1,51 @@
+﻿@model RealStateManager.BLL.Models.Rent
+
+@{
+    ViewData["Title"] = "New Rent";
+}
+
+<div class="form">
+    <div class="collection with-header">
+        <form asp-action="Create">
+            <div class="collection-header green darken-3">
+                <h6 class="white-text">New Rent</h6>
+            </div>
+
+            <div class="collection-item">
+                <div asp-validation-summary="ModelOnly" class="red-text text-darken-4"></div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input asp-for="RentValue" class="validate" id="rentValue" />
+                        <label asp-for="RentValue" id="rentValue"></label>
+                        <span class="red-text text-darken-4" asp-validation-for="RentValue"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select asp-for="MonthId" class="validate" asp-items="ViewBag.MonthId" id="month"></select>
+                        <label asp-for="MonthId" id="month">Select a month</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input asp-for="Year" class="validate" id="year" />
+                        <label asp-for="Year" id="year"></label>
+                        <span class="red-text text-darken-4" asp-validation-for="Year"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collection-item">
+                <button type="submit" class="btn-small green darken-3">Save</button> &emsp;
+                <a asp-action="Index" asp-controller="Rents">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/InitializeSelect.js"></script>
+}

@@ -11,6 +11,7 @@ namespace RealStateManager.DAL.Interface
         Task<TEntity> GetById(int id);
         Task<TEntity> GetById(string id);
         Task Insert(TEntity entity);
+        Task Insert(List<TEntity> entity);
         Task Update(TEntity entity);
         Task Delete(TEntity entity);
         Task Delete(int id);

@@ -19,6 +19,10 @@ namespace RealStateManager.DAL
             services.AddTransient<IServiceBuildingRepository, ServiceBuildingRepository>();
             services.AddTransient<IHistoricResourcesRepository, HistoricResourcesRepository>();
             services.AddTransient<IApartmentRepository, ApartmentRepository>();
+            services.AddTransient<IFunctionRepository, FunctionRepository>();
+            services.AddTransient<IRentRepository, RentRepository>();
+            services.AddTransient<IMonthRepository, MonthRepository>();
+            services.AddTransient<IPaymentRepository, PaymentRepository>();
         }
     }
 }

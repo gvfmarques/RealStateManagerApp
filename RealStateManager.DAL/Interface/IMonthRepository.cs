@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace RealStateManager.DAL.Interface
 {
-    public interface IFunctionRepository : IRepositoryGeneric<Function>
+    public interface IMonthRepository : IRepositoryGeneric<Month>
     {
-        Task AddFunction(Function function);
-
-        new Task UpdateFunction(Function function);
+        new Task<IEnumerable<Month>> GetAll();
     }
 }

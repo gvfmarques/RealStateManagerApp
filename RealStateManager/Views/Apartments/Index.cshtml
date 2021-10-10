@@ -46,7 +46,7 @@
 
                         <div class="card-action">
                             <a asp-action="Edit" asp-route-id="@item.ApartmentId" class="btn-small purple darken-4">Updating</a> &nbsp;
-                            <a onclick="ConfirmarExclusao(@item.ApartmentId, @item.Number, '@controller')" class="btn-small red accent-3 modal-trigger" data-target="modal">
+                            <a onclick="ConfirmDeletion(@item.ApartmentId, @item.Number, '@controller')" class="btn-small red accent-3 modal-trigger" data-target="modal">
                                 Delete
                             </a>
                         </div>
