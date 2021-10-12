@@ -33,6 +33,7 @@ namespace RealStateManager.Controllers
             return View(await _userRepository.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
@@ -179,7 +180,7 @@ namespace RealStateManager.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Logout(string name)
+        public async Task<IActionResult> Logout()
         {
             await _userRepository.LogOutUser();
             return RedirectToAction("Login");
@@ -193,6 +194,11 @@ namespace RealStateManager.Controllers
         public IActionResult Disapproved(string name)
         {
             return View(name);
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         [Authorize(Roles = "Manager, ResidentManager")]
@@ -289,6 +295,7 @@ namespace RealStateManager.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
         public async Task<IActionResult> MyInformations()
         {
             return View(await _userRepository.GetUserByName(User));

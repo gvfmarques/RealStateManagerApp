@@ -15,6 +15,7 @@ namespace RealStateManager.Extensions
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 options.LoginPath = "/User/Login";
+                options.AccessDeniedPath = "/User/AccessDenied";
             });
         }
     }

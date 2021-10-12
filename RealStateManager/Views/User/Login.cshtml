@@ -1,5 +1,4 @@
-﻿
-@model RealStateManager.ViewModels.LoginViewModel
+﻿@model RealStateManager.ViewModels.LoginViewModel
 @{
     Layout = null;
     ViewData["Title"] = "Residents Login";
@@ -38,16 +37,16 @@
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input asp-for="Email" class="validate" id="Email" />
-                            <label asp-for="Email" id="Email"></label>
+                            <input asp-for="Email" class="validate" id="email" />
+                            <label asp-for="Email" id="email"></label>
                             <span asp-validation-for="Email" class="red-text text-darken-4"></span>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input asp-for="Password" class="validate" type="password" id="Password" />
-                            <label asp-for="Password" id="Password"></label>
+                            <input asp-for="Password" class="validate" type="password" id="password" />
+                            <label asp-for="Password" id="password"></label>
                             <span asp-validation-for="Password" class="red-text text-darken-4"></span>
                         </div>
                     </div>

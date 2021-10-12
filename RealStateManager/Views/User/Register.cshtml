@@ -1,7 +1,7 @@
 ﻿@model RealStateManager.ViewModels.ViewModelRegister
 @{
     Layout = null;
-    ViewData["Title"] = "Resident registration";
+    ViewData["Title"] = "Resident Registration";
 }
 
 <!DOCTYPE html>
@@ -62,12 +62,13 @@
                     <div class="row">
                         <div class="file-field input-field col s12">
                             <div class="btn-small">
-                                <span>Select your Picture</span>
+                                <span>Select your Profile Picture</span>
                                 <input asp-for="Picture" type="file" class="validate" id="picture" />
                             </div>
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" />
+
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" />
+                            </div>
                         </div>
                     </div>
 

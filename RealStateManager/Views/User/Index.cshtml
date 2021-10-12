@@ -44,48 +44,49 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UserName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Identification)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PhoneNumber)
-                            </td>
-
-                            @if (item.Status == StatusAccount.Analysing)
-                            {
+                            <tr>
                                 <td>
-                                    <span class="new badge purple darken-3" data-badge-caption="" id="@item.Id">@Html.DisplayFor(modelItem => item.Status)</span>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Identification)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
                                 </td>
 
-                                <td class="@item.Id">
-                                    <a class="btn-floating blue darken-4 btnApprove tooltip" onclick="ApproveUser('@item.Id', '@item.UserName')" data-position="right" data-tooltip="Approve User"><i class="material-icons">thumb_up</i></a>
-                                    <a class="btn-floating red darken-4 btnDisapprove tooltip" onclick="DisapproveUser('@item.Id', '@item.UserName')"  data-position="right" data-tooltip="Disapprove User"><i class="material-icons">thumb_down</i></a>
-                                </td>
-                            }
-                            else if (item.Status == StatusAccount.Approved)
-                            {
-                                <td>
-                                    <span class="new badge green darken-3" data-badge-caption="" >@Html.DisplayFor(modelItem => item.Status)</span>
-                                </td>
+                                @if (item.Status == StatusAccount.Analysing)
+                                {
+                                    <td>
+                                        <span class="new badge purple darken-3" data-badge-caption="" id="@item.Id">@Html.DisplayFor(modelItem => item.Status)</span>
+                                    </td>
 
-                                <td>
-                                    <a class="btn-floating blue darken-4 tooltip" asp-controller="User" asp-action="UserManagement" asp-route-UserId="@item.Id" asp-route-name="@item.UserName" data-position="right" data-tooltip="User Management"><i class="material-icons">group</i></a>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <span class="new badge orange darken-3" data-badge-caption="">@Html.DisplayFor(modelItem => item.Status)</span>
-                                </td> 
-                            }
-                        </tr>
+                                    <td class="@item.Id">
+                                        <a class="btn-floating blue darken-4 btnApprove tooltip" onclick="ApproveUser('@item.Id', '@item.UserName')" data-position="right" data-tooltip="Approve User"><i class="material-icons">thumb_up</i></a>
+                                        <a class="btn-floating red darken-4 btnDisapprove tooltip" onclick="DisapproveUser('@item.Id', '@item.UserName')" data-position="right" data-tooltip="Disapprove User"><i class="material-icons">thumb_down</i></a>
+                                    </td>
+                                }
+                                else if (item.Status == StatusAccount.Approved)
+                                {
+                                    <td>
+                                        <span class="new badge green darken-3" data-badge-caption="">@Html.DisplayFor(modelItem => item.Status)</span>
+                                    </td>
+
+                                    <td>
+                                        <a class="btn-floating blue darken-4 tooltip" asp-controller="User" asp-action="UserManagement" asp-route-UserId="@item.Id" asp-route-name="@item.UserName" data-position="right" data-tooltip="User Management"><i class="material-icons">group</i></a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="new badge orange darken-3" data-badge-caption="">@Html.DisplayFor(modelItem => item.Status)</span>
+                                    </td>
+
+                                }
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -93,3 +94,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/OperationsUser.js"></script>
+}

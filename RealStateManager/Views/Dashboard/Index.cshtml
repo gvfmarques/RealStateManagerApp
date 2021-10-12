@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "Administrative Panel";
+}
+
+<div class="card card-espaced">
+    <div class="card-header">
+        <div class="row blue-text text-darken-2">
+            <div class="col s6">
+                <h6 class="valign-wrapper"><i class="material-icons">attach_money</i> INCOMES / EARNINGS BY YEAR</h6>
+            </div>
+            <div class="col s6">
+                <div class="row valign-wrapper">
+                    <div class="col s9">
+                        <button type="button" class="btn-small light-blue darken-3 btnIncomes">Earnings</button>
+                        <button type="button" class="btn-small red darken-4 btnExpenses">Expenses</button>
+                    </div>
+
+                    <div class="col s3">
+                        <select asp-items="ViewBag.Years" class="validate" id="year"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <partial name="_GraphValuesGainsExpenses" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s6">
+        <div class="collection with-header collectionpie">
+            <div class="collection-header">
+                <h6 class="valign-wrapper"><i class="material-icons">monetization_on</i> EARNINGS AND EXPENSES TOTAL</h6>
+            </div>
+
+            <div class="collection-item">
+                <partial name="_GraphExpensesIncomesTotal" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col s6">
+        <div class="collection with-header collectionpie">
+            <div class="collection-header">
+                <h6 class="valign-wrapper"><i class="material-icons">monetization_on</i> LAST MOVEMENTS</h6>
+            </div>
+
+            <div class="collection-item">
+                @await Component.InvokeAsync("LatestMovements")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/InitializeSelect.js"></script>
+    <script src="~/js/MetdosGraphs.js"></script>
+
+    <script>
+        UploadEarnedDataPerYear();
+        AssembleChartExpensesTotalGains();
+
+
+        function UploadEarnedDataPerYear() {
+            const year = $("#year").val();
+            debugger;
+            AssembleGraphicLinesEarnings(year);
+        }
+        function UploadExpensesDataPerYear() {
+            const year = $("#year").val();
+            debugger;
+            AssembleGraphicLinesExpenses(year);
+        }
+        $(".btnIncomes").on('click', function () {
+            UploadEarnedDataPerYear();
+        });
+        $(".btnExpenses").on('click', function () {
+            UploadExpensesDataPerYear();
+        })
+    </script>
+}
