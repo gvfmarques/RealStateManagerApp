@@ -7,7 +7,7 @@ namespace RealStateManager.BLL.Models
     public class HistoricResource
     {
 
-        public int HistoricResourceId { get; set; }
+        public int HistoryResourceId { get; set; }
 
         public decimal Value { get; set; }
 

@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace RealStateManager.ViewComponents
 {
-    public class LatestMovementsViewComponent : ViewComponent
+    public class LastMovesViewComponent : ViewComponent
     {
         private readonly IHistoricResourcesRepository _historicResourcesRepository;
 
-        public LatestMovementsViewComponent(IHistoricResourcesRepository historicResourcesRepository)
+        public LastMovesViewComponent(IHistoricResourcesRepository historicResourcesRepository)
         {
             _historicResourcesRepository = historicResourcesRepository;
         }

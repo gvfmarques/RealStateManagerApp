@@ -1,4 +1,4 @@
-﻿function AssembleChartExpensesTotalGains(year) {
+﻿function AssembleChartLinesGains(year) {
 
     $.ajax({
         url: '/Dashboard/GraphicDataGains',
@@ -41,7 +41,7 @@
     });
 }
 
-function AssembleGraphicLinesExpenses(year) {
+function AssembleChartLinesExpenses(year) {
     $.ajax({
         url: '/Dashboard/GraphicDataExpenses',
         method: 'GET',

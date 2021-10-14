@@ -11,7 +11,7 @@ namespace RealStateManager.DAL.Mapping
     {
         public void Configure(EntityTypeBuilder<HistoricResource> builder)
         {
-            builder.HasKey(hr => hr.HistoricResourceId);
+            builder.HasKey(hr => hr.HistoryResourceId);
             builder.Property(hr => hr.Value).IsRequired();
             builder.Property(hr => hr.Type).IsRequired();
             builder.Property(hr => hr.Day).IsRequired();

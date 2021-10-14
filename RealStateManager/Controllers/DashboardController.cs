@@ -24,7 +24,7 @@ namespace RealStateManager.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ViewData["Anos"] = new SelectList(await _rentRepository.GetAllYears());
+            ViewData["Years"] = new SelectList(await _rentRepository.GetAllYears());
             return View();
         }
 

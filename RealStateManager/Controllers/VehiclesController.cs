@@ -31,14 +31,14 @@ namespace RealStateManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("vehicleId,Name,brand,Color,Plate,UserId")] Vehicle vehicle)
+        public async Task<IActionResult> Create([Bind("VehicleId,Name,Brand,Color,Plate,UserId")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
                 User user = await _userRepository.GetUserByName(User);
                 vehicle.UserId = user.Id;
                 await _vehicleRepository.Insert(vehicle);
-                return RedirectToAction("MyInformations", "Users");
+                return RedirectToAction("MyInformations", "User");
             }
 
             return View(vehicle);
@@ -67,7 +67,7 @@ namespace RealStateManager.Controllers
             if (ModelState.IsValid)
             {
                 await _vehicleRepository.Update(vehicle);
-                return RedirectToAction("MyInformations", "Users");
+                return RedirectToAction("MyInformations", "User");
             }
 
             return View(vehicle);

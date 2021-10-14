@@ -12,6 +12,7 @@ namespace RealStateManager.DAL.Repositories
     public class HistoricResourcesRepository : RepositoryGeneric<HistoricResource>, IHistoricResourcesRepository
     {
         private readonly RealStateManagerContext _realStateManagerContext;
+
         public HistoricResourcesRepository(RealStateManagerContext realStateManagerContext) : base(realStateManagerContext)
         {
             _realStateManagerContext = realStateManagerContext;
@@ -83,7 +84,7 @@ namespace RealStateManager.DAL.Repositories
         {
             try
             {
-                return await _realStateManagerContext.HistoricResources.Include(hr => hr.Month).OrderByDescending(hr => hr.HistoricResourceId)
+                return await _realStateManagerContext.HistoricResources.Include(hr => hr.Month).OrderByDescending(hr => hr.HistoryResourceId)
                     .Take(5).ToListAsync();
             }
             catch (Exception ex)

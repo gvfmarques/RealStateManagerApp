@@ -9,7 +9,7 @@
             </div>
             <div class="col s2">
                 <a asp-controller="Vehicles" asp-action="Create" class="waves-effect waves-light btn-small btn-floating green darken-4 tooltip" data-position="right" data-tooltip="New Vehicle">
-                    <i class="material-icons">Add</i>
+                    <i class="material-icons" >add</i>
                 </a>
             </div>
         </div>
@@ -54,7 +54,7 @@
                             <a asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.VehicleId" class="btn-floating btn-small blue darken-4 tooltip" data-position="right" data-tooltip="Updating Vehicle">
                                 <i class="material-icons">mode_edit</i>
                             </a> |
-                            <a onclick="ConfirmExclusion(@item.VehicleId,'@item.Name')" class="btn-floating btn-small red darken-4 tooltip modal-trigger" data-target="modal" data-position="right" data-tooltip="Excluding Vehicle">
+                            <a onclick="ConfirmDeletion(@item.VehicleId,'@item.Name')" class="btn-floating btn-small red darken-4 tooltip modal-trigger" data-target="modal" data-position="right" data-tooltip="Excluding Vehicle">
                                 <i class="material-icons">delete_forever</i>
                             </a>
                         </td>

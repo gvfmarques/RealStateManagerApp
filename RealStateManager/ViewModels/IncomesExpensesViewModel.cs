@@ -1,5 +1,4 @@
-﻿
-namespace RealStateManager.ViewModels
+﻿namespace RealStateManager.ViewModels
 {
     public class IncomesExpensesViewModel
     {
