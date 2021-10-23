@@ -88,7 +88,7 @@ function AssembleChartExpensesTotalGains() {
         url: '/Dashboard/GraphicDataExpensesTotalGains',
         method: 'GET',
         success: function (data) {
-            new Chart(document.getElementById("GraphicDataExpensesTotalGains"), {
+            new Chart(document.getElementById("GraphExpensesIncomesTotal"), {
 
                 type: 'pie',
 

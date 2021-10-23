@@ -11,9 +11,9 @@ namespace RealStateManager.DAL.Mapping
     {
         public void Configure(EntityTypeBuilder<ServiceBuilding> builder)
         {
-            builder.HasKey(bs => bs.ServiceBuildingId);
+            builder.HasKey(bs => bs.BuildingServiceId);
             builder.Property(bs => bs.ServiceId).IsRequired();
-            builder.Property(bs => bs.DateExecution).IsRequired();
+            builder.Property(bs => bs.ExecutionDate).IsRequired();
 
             builder.HasOne(bs => bs.Service).WithMany(bs => bs.BuildingServices).HasForeignKey(bs => bs.ServiceId);
 

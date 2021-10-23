@@ -3,7 +3,7 @@
 @using RealStateManager.BLL.Models
 
 @{
-    ViewData["Title"] = "Services registered";
+    ViewData["Title"] = "Services Registered";
     string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
@@ -39,7 +39,7 @@
                             @Html.DisplayNameFor(model => model.Status)
                         </th>
 
-                        <th>Ações</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                R$ @Html.DisplayFor(modelItem => item.Value)
+                                $ @Html.DisplayFor(modelItem => item.Value)
                             </td>
 
                             <td>

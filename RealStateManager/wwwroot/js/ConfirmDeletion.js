@@ -1,10 +1,10 @@
-﻿function ConfirmeDeletion(id, name, controller) {
+﻿function ConfirmDeletion(id, name, controller) {
     $('.modal').modal({
         dismissble: true
     });
 
     $('#modal').modal('open');
-    $(".nome").text(name);
+    $(".name").text(name);
     const url = "/" + controller + "/Delete";
 
     $(".btnDelete").on('click', function () {

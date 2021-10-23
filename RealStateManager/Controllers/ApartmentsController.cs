@@ -55,7 +55,7 @@ namespace RealStateManager.Controllers
             {
                 if (picture != null)
                 {
-                    string directory = Path.Combine(_webHostEnvironment.WebRootPath, "Pictures");
+                    string directory = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
                     string pictureName = Guid.NewGuid().ToString() + picture.FileName;
 
                     using (FileStream fileStream = new FileStream(Path.Combine(directory, pictureName), FileMode.Create))
@@ -83,7 +83,7 @@ namespace RealStateManager.Controllers
             {
                 return NotFound();
             }
-            TempData["Foto"] = apartment.Picture;
+            TempData["Picture"] = apartment.Picture;
             ViewData["ApartmentResidentId"] = new SelectList(await _userRepository.GetAll(), "Id", "UserName", apartment.ApartmentResidentId);
             ViewData["ApartmentOwnerId"] = new SelectList(await _userRepository.GetAll(), "Id", "UserName", apartment.ApartmentOwnerId);
             return View(apartment);
@@ -108,8 +108,8 @@ namespace RealStateManager.Controllers
                     using (FileStream fileStream = new FileStream(Path.Combine(directory, namePicture), FileMode.Create))
                     {
                         await picture.CopyToAsync(fileStream);
-                        apartment.Picture = "~/Imagens/" + namePicture;
-                        System.IO.File.Delete(TempData["Foto"].ToString().Replace("~", "wwwroot"));
+                        apartment.Picture = "~/Images/" + namePicture;
+                        System.IO.File.Delete(TempData["Picture"].ToString().Replace("~", "wwwroot"));
                     }
                 }
                 else

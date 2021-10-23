@@ -133,7 +133,7 @@ namespace RealStateManager.Controllers
                 ServiceBuilding serviceBuilding = new ServiceBuilding
                 {
                     ServiceId = viewModel.ServiceId,
-                    DateExecution = viewModel.Date
+                    ExecutionDate = viewModel.ExecutionDate
                 };
 
                 await _serviceBuildingRepository.Insert(serviceBuilding);
@@ -141,9 +141,9 @@ namespace RealStateManager.Controllers
                 HistoricResource hr = new HistoricResource
                 {
                     Value = service.Value,
-                    MonthId = serviceBuilding.DateExecution.Month,
-                    Day = serviceBuilding.DateExecution.Day,
-                    Year = serviceBuilding.DateExecution.Year,
+                    MonthId = serviceBuilding.ExecutionDate.Month,
+                    Day = serviceBuilding.ExecutionDate.Day,
+                    Year = serviceBuilding.ExecutionDate.Year,
                     Type = Types.Output
                 };
 

@@ -10,6 +10,6 @@ namespace RealStateManager.DAL.Interface
     {
         Task AddFunction(Function function);
 
-        new Task UpdateFunction(Function function);
+        Task UpdateFunction(Function function);
     }
 }

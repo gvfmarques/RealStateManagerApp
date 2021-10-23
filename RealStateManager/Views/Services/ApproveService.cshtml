@@ -1,6 +1,6 @@
 ﻿@model RealStateManager.ViewModels.ServiceApprovedViewModel
 @{
-    ViewData["Title"] = "Approve do Service " + Model.Name;
+    ViewData["Title"] = "Approve the Service " + Model.Name;
 }
 
 <div class="form">
@@ -17,9 +17,9 @@
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input asp-for="Date" type="text" class="validate" id="date" />
-                        <label asp-for="Date" id="date"></label>
-                        <span class="red-text text-darken-4" asp-validation-for="Date"></span>
+                        <input asp-for="ExecutionDate" type="text" class="validate" id="date" />
+                        <label asp-for="ExecutionDate" id="date"></label>
+                        <span class="red-text text-darken-4" asp-validation-for="ExecutionDate"></span>
                     </div>
                 </div>
             </div>
